@@ -1,14 +1,19 @@
 package com.frameium.pageobject.SalesforcePractise;
 
 import com.frameium.genericfunctions.GenericFunctions;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.List;
 
 public class SaleconsoleCompaign extends GenericFunctions {
     //initializing webdriver
@@ -24,13 +29,17 @@ public class SaleconsoleCompaign extends GenericFunctions {
     private By saveBtn = By.xpath("//button[@title='Save']");
     private By vfyCampName = By.xpath("//span[@class='uiOutputText' and text()='sdfgg']");
     private By clckdetails  = By.xpath("//span[text()='Details']");
+    private By campaigntable = By.xpath("//table[contains(@class,'slds-table forceRecordLayout slds-table_header-fixed slds-table--header-fixed slds-table_edit slds-table--edit slds-table_bordered slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable')]//tbody");
+    private By tableclick = By.xpath("//*[@class=\"slds-table forceRecordLayout slds-table_header-fixed slds-table--header-fixed slds-table_edit slds-table--edit slds-table_bordered slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable\"]//tbody/tr[3]/td[2]");
     WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-    //creating constructor.
+    //creating constructor.@
     public SaleconsoleCompaign(WebDriver driver){
-        this.driver=driver;
+       this.driver=driver;
     }
-
+//@BeforeTest
+//public void iniitialize(){
+//        driver=new ChromeDriver();
     //creating methods.
     public void saleconsolepage()throws InterruptedException{
         Thread.sleep(2000);
@@ -100,4 +109,34 @@ public class SaleconsoleCompaign extends GenericFunctions {
 //        return NameElement;
 //    }
 
-}
+//    public String gettablerowtext(int row, int col)throws InterruptedException {
+//        Thread.sleep(2000);
+//        String celltext =
+//    }
+
+    public void getalltableData(WebDriver driver)throws InterruptedException{
+//        WebDriverManager.chromedriver().setup();
+//        WebDriver driver=new ChromeDriver();
+//        driver.navigate().to("https://testhouse5-dev-ed.develop.lightning.force.com/lightning/o/Campaign/list?filterName=__Recent");
+//        driver.navigate().refresh();
+        Thread.sleep(2000);
+        waitForByElement(compaignbtn);
+        clickElement(compaignbtn);
+        WebElement Table = driver.findElement(By.xpath("//table[contains(@class,'slds-table forceRecordLayout slds-table_header-fixed slds-table--header-fixed slds-table_edit slds-table--edit slds-table_bordered slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable')]//tbody"));
+        //Find all rows in the table.
+        //so we need to create list.
+        List<WebElement> rowdata = Table.findElements(By.tagName("tr"));
+        System.out.println("table datas are " + rowdata);
+    }
+
+    }
+//    public void ExtractTabledata()throws InterruptedException{
+//        Thread.sleep(2000);
+//        WebElement Table = driver.findElement(By.xpath("//table[contains(@class,'slds-table forceRecordLayout slds-table_header-fixed slds-table--header-fixed slds-table_edit slds-table--edit slds-table_bordered slds-table--bordered resizable-cols slds-table--resizable-cols uiVirtualDataTable')]//tbody"));
+//        //Find all rows in the table.
+//        //so we need to create list.
+//        List<WebElement> rowdata = Table.findElements(By.tagName("tr"));
+//        System.out.println("table datas are " + rowdata);
+//    }
+
+

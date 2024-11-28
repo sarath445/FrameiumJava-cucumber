@@ -69,4 +69,9 @@ public class SalesconscampaiTest extends GenericFunctions {
             throw e;
         }
     }
+
+    @Then("User get datas from table.")
+    public void userGetDatasFromTable(WebDriver driver)throws InterruptedException {
+        salescons.getalltableData(driver);
+    }
 }
